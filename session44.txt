@@ -1,0 +1,21 @@
+Generally, how we do deployment ?
+
+1. Create a server
+2. Provision the server using Ansible
+3. Stop the server
+4. Take AMI
+5. Create launch template version
+6. Refresh auto-scaling
+
+To deploy catalogue, you should create the infra upto 05-app-alb
+and catalogue will be deployed using Jenkins
+
+Until now we have ansible is downloading the packages from S3 and but now onwards
+download artifacts from nexus and we can even download a particular version....
+
+Ansible have to know about the 
+Nexus location and then artifact version 
+
+to achieve this we should make some changes in the playbook 
+
+from terraform you should send the artifact version to ansible
