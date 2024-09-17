@@ -19,3 +19,7 @@ Nexus location and then artifact version
 to achieve this we should make some changes in the playbook 
 
 from terraform you should send the artifact version to ansible
+
+we have added two folder dev and prod 
+
+Jenkins holds the version of the application, it should send the version to terraform
