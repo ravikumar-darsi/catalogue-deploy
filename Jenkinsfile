@@ -22,11 +22,19 @@ pipeline {
     }
 
     stages {
-        stage('Deploy') {
+        stage('Print current version') {
             steps {
                 sh """
                 echo "version: ${params.version}"
                 echo "environment: ${params.environment}"
+                """
+            }
+        }
+        stage('Init') {
+            steps {
+                sh """
+                    cd terraform
+                    terraform init --backend-config=${params.environment}/backend.tf -reconfigure
                 """
             }
         }
