@@ -9,8 +9,9 @@ pipeline {
     //     nexusURL = '172.31.21.186:8081' // URL for Nexus repository
     // }
     options {
-        timeout(time: 1, unit: 'HOURS') // Set timeout of 1 hour for the entire pipeline
-        disableConcurrentBuilds() // Prevents concurrent builds of the same job
+        ansiColor('xterm')
+        timeout(time: 1, unit: 'HOURS')
+        disableConcurrentBuilds()
     }
 
     // Uncomment the parameters block if you need to pass parameters
@@ -35,6 +36,14 @@ pipeline {
                 sh """
                     cd terraform
                     terraform init --backend-config=${params.environment}/backend.tf -reconfigure
+                """
+            }
+        }
+        stage('Plan') {
+            steps {
+                sh """
+                    cd terraform
+                    terraform plan -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}"
                 """
             }
         }
